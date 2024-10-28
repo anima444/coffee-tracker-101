@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .counter-container {
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        #coffeeCup {
+            width: 100px;
+            height: 150px;
+            border: 3px solid #333;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            background-color: #fff;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #6b4f4f;
+            transition: height 0.3s;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<div class="counter-container">
+    <h1>Daily Coffee Tracker</h1>
+    <p>Coffees today: <span id="coffeeCount">0</span></p>
+    <div id="coffeeCup">
+        <div id="fillLevel" class="fill" style="height: 0%;"></div>
+    </div>
+    <button onclick="addCoffee()" id="addCoffeeBtn">Add a Coffee</button>
+</div>
+
+<script>
+    let coffeeCount = 0;
+    const maxCoffees = 5; // Customize maximum coffees if needed
+
+    function addCoffee() {
+        // Increase coffee count
+        coffeeCount += 1;
+        
+        // Update the coffee count display
+        document.getElementById("coffeeCount").innerText = coffeeCount;
+
+        // Update fill level based on the coffee count
+        const fillLevel = document.getElementById("fillLevel");
+        fillLevel.style.height = `${(coffeeCount / maxCoffees) * 100}%`;
+
+        // Disable button after reaching max coffee limit
+        if (coffeeCount >= maxCoffees) {
+            document.getElementById("addCoffeeBtn").disabled = true;
+            alert("You've reached your coffee limit for the day!");
+        }
+    }
+</script>
+
+</body>
+</html>
